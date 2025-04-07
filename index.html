@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+    <link rel="stylesheet" href="main.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand icon-nav" href="#">showsatellit</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ul-nav">
+
+                <li class="nav-item">
+                    <a href="#order" class="nav-link active nav-link" onclick="handleNavClick(event, this)">Home</a>
+                </li>
+              <li class="nav-item">
+                <a href="#products-list" class="nav-link" onclick="handleNavClick(event, this)">Products</a>
+            </li>
+              <li>
+                <a href="#payment-section" class="nav-link" onclick="handleNavClick(event, this)">payment</a>
+              </li>
+            </ul>
+            <div class="cart-container">
+                <div class="cart-icon" onclick="toggleCart()">
+                  <span class="cart-count">0</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <input type="submit" class="btn btn-primary me-md-2 header-order-btn" value="Order" form="order-form"></input>
+                  </div>
+                <!-- <input type="submit" class="header-order-btn" value="Order" form="order-form"> -->
+                <!-- Shopping Cart Box -->
+                <div class="cart-box" id="cartBox">
+                  <div class="cart-header">
+                    <h3>Shopping Cart</h3>
+                    <button class="close-cart" onclick="toggleCart()">×</button>
+                  </div>
+                  <div class="cart-items">
+                    <!-- Cart items will be dynamically added here -->
+                  </div>
+                  <div class="cart-footer">
+                    <div class="cart-total">
+                      <span>Total:</span>
+                      <span class="total-amount">$0.00</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        </div>
+      </nav>
+      <main>
+        <section>
+            <!-- image oled -->
+            <div class="oled">
+                <h3>OLED</h3>
+            </div>
+        </section>
+        <section class="search-product">
+            <!-- Search -->
+        <div class="search-container">
+            <div class="search-wrapper">
+              <button type="button" class="filter-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="4" y1="21" x2="4" y2="14"></line>
+                  <line x1="4" y1="10" x2="4" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12" y2="3"></line>
+                  <line x1="20" y1="21" x2="20" y2="16"></line>
+                  <line x1="20" y1="12" x2="20" y2="3"></line>
+                  <line x1="1" y1="14" x2="7" y2="14"></line>
+                  <line x1="9" y1="8" x2="15" y2="8"></line>
+                  <line x1="17" y1="16" x2="23" y2="16"></line>
+                </svg>
+                Filters
+              </button>
+              <input type="text" id="product-search" placeholder="Search products..." class="search-input">
+              <button type="button" class="search-button">
+                <svg xmlns="http://www.w3.org/2000/svg" xlink:href="#search-aa744c1dc4ff05706e535c70138e98a4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="filter-options">
+              <div class="filter-grid">
+                <div class="filter-group">
+                  <label>Price Range</label>
+                  <select id="price-filter">
+                    <option value="">All Prices</option>
+                    <option value="0-100">Under 100 BHD</option>
+                    <option value="100-500">100 - 500 BHD</option>
+                    <option value="500+">Over 500 BHD</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label>Brand</label>
+                  <select id="brand-filter">
+                    <option value="">All Brands</option>
+                    <option value="JVC">JVC</option>
+                    <option value="Magic">Magic</option>
+                    <option value="AI General">AI General</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <div class="range-wrapper">
+                    <label for="customRange1" class="form-label">Screen Size</label>
+                  </div>
+                    <div class="range-container">
+                      <input type="range" class="form-range" id="customRange1" min="0" max="4" step="1" value="0">
+                      <div class="range-value" id="rangeValue">36</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="stock-toggle">
+                  <input type="checkbox" id="in-stock-filter">
+                  <label for="in-stock-filter">Show only in stock items</label>
+                </div>
+                <button type="button" class="clear-filters" onclick="event.preventDefault();">Clear Filters</button>
+              </div>
+            </div>
+            <!-- product-->
+            <div class="row row-cols-1 row-cols-md-3 g-4 products">
+                <div class="col packeg">
+                  <div class="card h-100">
+                    <div id="carousel1" class="carousel slide">
+                        <div class="carousel-indicators">
+                          <button type="button" data-bs-target="#carousel1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                          <button type="button" data-bs-target="#carousel1" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                          <button type="button" data-bs-target="#carousel1" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75729910842.png" class="d-block w-100" alt="...">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75729876865.png" class="d-block w-100" alt="...">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75727169529.png" class="d-block w-100" alt="...">
+                          </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel1" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>                   
+                       <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col packeg" >
+                  <div class="card h-100">
+                    <div id="carousel2" class="carousel slide">
+                        <div class="carousel-indicators">
+                          <button type="button" data-bs-target="#carousel2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                          <button type="button" data-bs-target="#carousel2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                          <button type="button" data-bs-target="#carousel2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75729910842.png" class="d-block w-100" alt="...">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75729876865.png" class="d-block w-100" alt="...">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75727169529.png" class="d-block w-100" alt="...">
+                          </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel2" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel2" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>                    
+                      <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col packeg">
+                  <div class="card h-100">
+                    <div id="carousel3" class="carousel slide">
+                        <div class="carousel-indicators">
+                          <button type="button" data-bs-target="#carousel3" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                          <button type="button" data-bs-target="#carousel3" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                          <button type="button" data-bs-target="#carousel3" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75729910842.png" class="d-block w-100" alt="...">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75729876865.png" class="d-block w-100" alt="...">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75727169529.png" class="d-block w-100" alt="...">
+                          </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel3" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel3" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>                    
+                      <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col packeg">
+                    <div class="card h-100">
+                        <div id="carousel4" class="carousel slide">
+                            <div class="carousel-indicators">
+                              <button type="button" data-bs-target="#carousel4" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                              <button type="button" data-bs-target="#carousel4" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                              <button type="button" data-bs-target="#carousel4" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75729910842.png" class="d-block w-100" alt="...">
+                              </div>
+                              <div class="carousel-item">
+                                <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75729876865.png" class="d-block w-100" alt="...">
+                              </div>
+                              <div class="carousel-item">
+                                <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75727169529.png" class="d-block w-100" alt="...">
+                              </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel4" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel4" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+                          </div>                      
+                          <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                      </div>
+                      <div class="card-footer">
+                        <small class="text-body-secondary">Last updated 3 mins ago</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col packeg">
+                    <div class="card h-100">
+                        <div id="carousel5" class="carousel slide">
+                            <div class="carousel-indicators">
+                              <button type="button" data-bs-target="#carousel5" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                              <button type="button" data-bs-target="#carousel5" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                              <button type="button" data-bs-target="#carousel5" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75729910842.png" class="d-block w-100" alt="...">
+                              </div>
+                              <div class="carousel-item">
+                                <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75729876865.png" class="d-block w-100" alt="...">
+                              </div>
+                              <div class="carousel-item">
+                                <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75727169529.png" class="d-block w-100" alt="...">
+                              </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel5" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel5" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+                          </div>                      
+                          <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                      </div>
+                      <div class="card-footer">
+                        <small class="text-body-secondary">Last updated 3 mins ago</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col packeg">
+                    <div class="card h-100">
+                        <div id="carousel6" class="carousel slide">
+                            <div class="carousel-indicators">
+                              <button type="button" data-bs-target="#carousel6" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                              <button type="button" data-bs-target="#carousel6" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                              <button type="button" data-bs-target="#carousel6" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75729910842.png" class="d-block w-100" alt="...">
+                              </div>
+                              <div class="carousel-item">
+                                <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75729876865.png" class="d-block w-100" alt="...">
+                              </div>
+                              <div class="carousel-item">
+                                <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75727169529.png" class="d-block w-100" alt="...">
+                              </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel6" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel6" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+                          </div>                      
+                          <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                      </div>
+                      <div class="card-footer">
+                        <small class="text-body-secondary">Last updated 3 mins ago</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col packeg">
+                    <div class="card h-100">
+                        <div id="carousel7" class="carousel slide">
+                            <div class="carousel-indicators">
+                              <button type="button" data-bs-target="#carousel7" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                              <button type="button" data-bs-target="#carousel7" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                              <button type="button" data-bs-target="#carousel7" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75729910842.png" class="d-block w-100" alt="...">
+                              </div>
+                              <div class="carousel-item">
+                                <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75729876865.png" class="d-block w-100" alt="...">
+                              </div>
+                              <div class="carousel-item">
+                                <img src="https://jvctv.eu/storage/products/image/s/419-1-lt-55vao9201-75727169529.png" class="d-block w-100" alt="...">
+                              </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel7" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel7" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+                          </div>                      
+                          <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                      </div>
+                      <div class="card-footer">
+                        <small class="text-body-secondary">Last updated 3 mins ago</small>
+                      </div>
+                    </div>
+                  </div>
+      
+              </div>
+        </section>
+
+      </main>
+      <script src="script.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script> 
+</body>
+</html>
